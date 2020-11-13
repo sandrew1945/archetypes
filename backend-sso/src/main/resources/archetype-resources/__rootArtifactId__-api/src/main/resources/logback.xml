@@ -1,0 +1,57 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+<!--    <property name="LOG_PATH" value="/opt/nesc/logs/indicator/"/>-->
+<!--    <property name="LOG_PATH" value="/Users/summer/Documents/LocalFilePath/logs/publish"/>-->
+    <property name="MAX_HISTORY" value="10"/>
+    <property name="SIZE_CAP" value="10MB"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="SAVE-TO-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${symbol_dollar}{LOG_PATH}/publish.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${symbol_dollar}{LOG_PATH}/archived/publish_%d{dd-MM-yyyy}.log</fileNamePattern>
+            <maxHistory>${symbol_dollar}{MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${symbol_dollar}{SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <!--<appender-ref ref="SAVE-TO-FILE" />-->
+    </root>
+
+    <logger name="${package}" additivity="false" level="debug">
+        <appender-ref ref="STDOUT" />
+<!--        <appender-ref ref="SAVE-TO-FILE" />-->
+    </logger>
+    <logger name="com.sandrew.bury" additivity="false" level="debug">
+        <appender-ref ref="STDOUT" />
+<!--                <appender-ref ref="SAVE-TO-FILE" />-->
+    </logger>
+    <logger name="org.springframework" additivity="false" level="info">
+        <appender-ref ref="STDOUT" />
+<!--        <appender-ref ref="SAVE-TO-FILE" />-->
+    </logger>
+    <logger name="java.sql.ResultSet" additivity="false" level="info">
+        <appender-ref ref="STDOUT" />
+<!--        <appender-ref ref="SAVE-TO-FILE" />-->
+    </logger>
+    <logger name="org.apache.shiro" additivity="false" level="info">
+        <appender-ref ref="STDOUT" />
+<!--        <appender-ref ref="SAVE-TO-FILE" />-->
+    </logger>
+</configuration>
