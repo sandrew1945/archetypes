@@ -15,17 +15,17 @@ import ${groupId}.bury.bean.EqualPack;
 
 import java.util.Date;
 
-@TableName("tr_user_role")
-public class TrUserRolePO extends PO
+@TableName("tr_role_func_front")
+public class TrRoleFuncFrontPO extends PO
 {
 
-    public TrUserRolePO()
+    public TrRoleFuncFrontPO()
     {
     }
 
 
                                 
-    public TrUserRolePO(Integer id)
+    public TrRoleFuncFrontPO(Integer id)
     {
         if (null == this.id)
         {
@@ -37,11 +37,11 @@ public class TrUserRolePO extends PO
     @ColumnName(value = "id", isPK = true, autoIncrement = true)
     private Pack<Integer> id;
 
-    @ColumnName(value = "user_id", isPK = false, autoIncrement = false)
-    private Pack<Integer> userId;
-
     @ColumnName(value = "role_id", isPK = false, autoIncrement = false)
     private Pack<Integer> roleId;
+
+    @ColumnName(value = "function_id", isPK = false, autoIncrement = false)
+    private Pack<Integer> functionId;
 
     @ColumnName(value = "create_by", isPK = false, autoIncrement = false)
     private Pack<Integer> createBy;
@@ -75,25 +75,6 @@ public class TrUserRolePO extends PO
         return this.id == null ? null : this.id.getValue();
     }
 
-    public void setUserId(Integer userId)
-    {
-        if (null == this.userId)
-        {
-            this.userId = new EqualPack<Integer>();
-        }
-        this.userId.setValue(userId);
-    }
-
-    public void setUserId(Pack<Integer> userId)
-    {
-        this.userId = userId;
-    }
-        
-    public Integer getUserId()
-    {
-        return this.userId == null ? null : this.userId.getValue();
-    }
-
     public void setRoleId(Integer roleId)
     {
         if (null == this.roleId)
@@ -111,6 +92,25 @@ public class TrUserRolePO extends PO
     public Integer getRoleId()
     {
         return this.roleId == null ? null : this.roleId.getValue();
+    }
+
+    public void setFunctionId(Integer functionId)
+    {
+        if (null == this.functionId)
+        {
+            this.functionId = new EqualPack<Integer>();
+        }
+        this.functionId.setValue(functionId);
+    }
+
+    public void setFunctionId(Pack<Integer> functionId)
+    {
+        this.functionId = functionId;
+    }
+        
+    public Integer getFunctionId()
+    {
+        return this.functionId == null ? null : this.functionId.getValue();
     }
 
     public void setCreateBy(Integer createBy)

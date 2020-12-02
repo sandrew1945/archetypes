@@ -25,6 +25,15 @@ public interface CommonService
     JsonResult fileUploadLocal(String relativePath, MultipartFile file) throws ServiceException;
 
     /**
+     *  文件上传
+     * @param relativePath  相对路径
+     * @param base64File          上传文件
+     * @return
+     * @throws ServiceException
+     */
+    JsonResult fileUploadLocal(String relativePath, String filename, String base64File) throws ServiceException;
+
+    /**
      *  显示本地图片
      * @param relativePath  相对路径
      * @return

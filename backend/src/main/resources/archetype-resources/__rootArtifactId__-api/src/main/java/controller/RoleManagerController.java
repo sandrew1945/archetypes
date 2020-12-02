@@ -26,6 +26,7 @@
 package ${package}.controller;
 
 
+import ${package}.bean.FunctionsParam;
 import ${package}.bean.PermissionParam;
 import ${package}.bean.RoleBean;
 import ${package}.core.common.JsonResult;
@@ -34,7 +35,7 @@ import ${package}.core.exception.JsonException;
 import ${package}.core.exception.ServiceException;
 import ${package}.model.TmRolePO;
 import ${package}.service.RoleManagerService;
-import com.sandrew.bury.bean.PageResult;
+import ${groupId}.bury.bean.PageResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -146,6 +147,26 @@ public class RoleManagerController extends BaseController
 		try
 		{
 			return roleManagerService.savePermission(parameter.getRoleId(), parameter.getNode(), getLoginUser());
+		}
+		catch (Exception e)
+		{
+			log.error(e.getMessage(), e);
+			throw new JsonException("保存权限失败", e);
+		}
+	}
+
+	/**
+	 *  保存角色权限， 用于quasar
+	 * @param parameter
+	 * @return
+	 * @throws JsonException
+	 */
+	@PostMapping("saveSelectedFunc")
+	public @ResponseBody JsonResult saveSelectedFunc(@RequestBody FunctionsParam parameter) throws JsonException
+	{
+		try
+		{
+			return roleManagerService.saveSelectedFunc(parameter.getRoleId(), parameter.getFunctionIds(), getLoginUser());
 		}
 		catch (Exception e)
 		{

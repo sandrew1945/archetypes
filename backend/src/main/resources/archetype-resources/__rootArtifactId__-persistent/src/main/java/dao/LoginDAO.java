@@ -3,17 +3,17 @@
 #set( $symbol_escape = '\' )
 package ${package}.dao;
 
-import ${package}.bean.MenuBean;
 import ${package}.bean.RoleTreeNode;
 import ${package}.bean.UserInfo;
 import ${package}.core.common.Constants;
 import ${package}.core.exception.DAOException;
+import ${package}.model.TmFunctionPO;
 import ${package}.model.TmUserPO;
-import com.sandrew.bury.Session;
-import com.sandrew.bury.SqlSessionFactory;
-import com.sandrew.bury.callback.DAOCallback;
-import com.sandrew.bury.callback.POCallBack;
-import com.sandrew.bury.util.Parameters;
+import ${groupId}.bury.Session;
+import ${groupId}.bury.SqlSessionFactory;
+import ${groupId}.bury.callback.DAOCallback;
+import ${groupId}.bury.callback.POCallBack;
+import ${groupId}.bury.util.Parameters;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -102,41 +102,17 @@ public class LoginDAO
         });
     }
 
-    public List<MenuBean> getMenuInfo(Integer roleId)
+    public List<TmFunctionPO> getMenuByRole(Integer roleId)
     {
         Session session = sessionFactory.openSession();
         StringBuilder sql = new StringBuilder();
-        sql.append("select distinct tf.function_id,${symbol_escape}n");
-        sql.append("tf.function_code,${symbol_escape}n");
-        sql.append("tf.function_name,${symbol_escape}n");
-        sql.append("tf.father_func,${symbol_escape}n");
-        sql.append("tf.access_url,${symbol_escape}n");
-        sql.append("tf.icon${symbol_escape}n");
-        sql.append("from tm_role tr, tr_role_func trf, tm_function tf${symbol_escape}n");
-        sql.append("where tr.role_id = trf.role_id${symbol_escape}n");
-        sql.append("and trf.function_id = tf.function_id${symbol_escape}n");
-        sql.append("and tr.role_status = ?${symbol_escape}n");
-        sql.append("and tf.function_status = ?${symbol_escape}n");
-        sql.append("and tr.role_id = ?${symbol_escape}n");
-        sql.append("order by function_order");
+        sql.append("SELECT tf.* FROM tm_function tf join tr_role_func_front trff on tf.function_id = trff.function_id${symbol_escape}n");
+        sql.append("WHERE tf.is_delete = ?${symbol_escape}n");
+        sql.append("AND trff.role_id = ?${symbol_escape}n");
+        sql.append("ORDER BY func_order");
         Parameters params = new Parameters();
-        params.addParam(Constants.STATUS_ENABLE);
-        params.addParam(Constants.STATUS_ENABLE);
+        params.addParam(Constants.IF_TYPE_NO);
         params.addParam(roleId);
-        return session.select(sql.toString(), params.getParams(), new DAOCallback<MenuBean>()
-        {
-            @Override
-            public MenuBean wrapper(ResultSet rs, int i) throws SQLException
-            {
-                MenuBean menuBean = new MenuBean();
-                menuBean.setImgUrl(rs.getString("icon"));
-                menuBean.setFuncId(rs.getString("function_id"));
-                menuBean.setFuncCode(rs.getString("function_code"));
-                menuBean.setFuncName(rs.getString("function_name"));
-                menuBean.setParentId(rs.getString("father_func"));
-                menuBean.setFunctionUrl(rs.getString("access_url"));
-                return menuBean;
-            }
-        });
+        return session.select(sql.toString(), params.getParams(), new POCallBack(TmFunctionPO.class));
     }
 }

@@ -17,13 +17,13 @@
     </appender>
 
     <appender name="SAVE-TO-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${symbol_dollar}{LOG_PATH}/publish.log</file>
+        <file>${symbol_dollar}{LOG_PATH}/${parentArtifactId}.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${symbol_dollar}{LOG_PATH}/archived/publish_%d{dd-MM-yyyy}.log</fileNamePattern>
+            <fileNamePattern>${symbol_dollar}{LOG_PATH}/archived/${parentArtifactId}_%d{dd-MM-yyyy}.log</fileNamePattern>
             <maxHistory>${symbol_dollar}{MAX_HISTORY}</maxHistory>
             <totalSizeCap>${symbol_dollar}{SIZE_CAP}</totalSizeCap>
         </rollingPolicy>
@@ -38,7 +38,7 @@
         <appender-ref ref="STDOUT" />
 <!--        <appender-ref ref="SAVE-TO-FILE" />-->
     </logger>
-    <logger name="com.sandrew.bury" additivity="false" level="debug">
+    <logger name="${groupId}.bury" additivity="false" level="debug">
         <appender-ref ref="STDOUT" />
 <!--                <appender-ref ref="SAVE-TO-FILE" />-->
     </logger>

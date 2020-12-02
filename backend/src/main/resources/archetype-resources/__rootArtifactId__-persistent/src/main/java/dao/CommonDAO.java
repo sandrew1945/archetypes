@@ -4,10 +4,10 @@
 package ${package}.dao;
 
 import ${package}.core.exception.DAOException;
-import com.sandrew.bury.Session;
-import com.sandrew.bury.SqlSessionFactory;
-import com.sandrew.bury.bean.PO;
-import com.sandrew.bury.exception.POException;
+import ${groupId}.bury.Session;
+import ${groupId}.bury.SqlSessionFactory;
+import ${groupId}.bury.bean.PO;
+import ${groupId}.bury.exception.POException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 

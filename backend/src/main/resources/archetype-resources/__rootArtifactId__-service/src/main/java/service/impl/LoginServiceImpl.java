@@ -46,14 +46,12 @@ import ${package}.core.exception.ServiceException;
 import ${package}.core.shiro.MyUsernamePasswordToken;
 import ${package}.dao.CommonDAO;
 import ${package}.dao.LoginDAO;
-import ${package}.model.TmFuncFrontPO;
+import ${package}.model.TmFunctionPO;
 import ${package}.model.TmRolePO;
 import ${package}.model.TmUserPO;
 import ${package}.service.LoginService;
 import ${package}.service.UserManagerService;
 import ${package}.service.util.MenuNode;
-import ${package}.service.util.TreeMaker;
-import ${package}.service.util.TreeNode;
 import ${package}.service.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -149,27 +147,27 @@ public class LoginServiceImpl implements LoginService
     {
         try
         {
-            TmFuncFrontPO cond = new TmFuncFrontPO();
-            cond.setRoleId(roleId);
-            List<TmFuncFrontPO> functionList = commonDAO.select(cond);
+//            TmFuncFrontPO cond = new TmFuncFrontPO();
+//            cond.setRoleId(roleId);
+//            List<TmFuncFrontPO> functionList = commonDAO.select(cond);
+            List<TmFunctionPO> functionList = loginDAO.getMenuByRole(roleId);
+
             List<MenuNode> menuList = new ArrayList<>();
             Map<Integer, MenuNode> cache = new HashMap<>();
-            for (TmFuncFrontPO funcFront : functionList)
+            for (TmFunctionPO function : functionList)
             {
                 MenuNode menu = new MenuNode();
-                menu.setPath(funcFront.getPath());
-                menu.setName(funcFront.getName());
-                menu.setComponent(funcFront.getFile());
-                menu.setRedirect(funcFront.getRedirect());
+                menu.setPath(function.getPath());
+                menu.setName(function.getTitle());
                 Map<String, String> meta = new HashMap<>();
-                meta.put("title", funcFront.getTitle());
-                meta.put("icon", funcFront.getIcon());
+                meta.put("title", function.getTitle());
+                meta.put("icon", function.getIcon());
                 menu.setMeta(meta);
-                cache.put(funcFront.getFuncId(), menu);
-                if (null != funcFront.getFatherId())
+                cache.put(function.getFunctionId(), menu);
+                if (null != function.getFatherId())
                 {
                     // 如果存在父节点，那么将子节点添加到父节点，并且不添加到menuList中
-                    MenuNode father = cache.get(funcFront.getFatherId());
+                    MenuNode father = cache.get(function.getFatherId());
                     father.addChildren(menu);
                     continue;
                 }
@@ -255,41 +253,6 @@ public class LoginServiceImpl implements LoginService
             log.error(e.getMessage(), e);
             throw new ServiceException("角色选择树获取失败", e);
         }
-    }
-
-    @Override
-    public String generateMenu(Integer roleId) throws ServiceException
-    {
-        String treeStr = null;
-        try
-        {
-            treeStr = TreeMaker.buildTree(loginDAO.getMenuInfo(roleId));
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-
-            throw new ServiceException("获取菜单失败", e);
-        }
-        return treeStr;
-    }
-
-
-    @Override
-    public List<TreeNode> getMenuTreeNode(Integer roleId) throws ServiceException
-    {
-        List<TreeNode> treeNodes;
-        try
-        {
-            treeNodes = TreeMaker.handleNode(loginDAO.getMenuInfo(roleId));
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            log.error(e.getMessage(), e);
-            throw new ServiceException("获取菜单失败", e);
-        }
-        return treeNodes;
     }
 
     @Override

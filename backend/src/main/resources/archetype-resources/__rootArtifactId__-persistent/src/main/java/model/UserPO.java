@@ -7,9 +7,9 @@
  */
 package ${package}.model;
 
-import com.sandrew.bury.annotations.ColumnName;
-import com.sandrew.bury.annotations.TableName;
-import com.sandrew.bury.bean.PO;
+import ${groupId}.bury.annotations.ColumnName;
+import ${groupId}.bury.annotations.TableName;
+import ${groupId}.bury.bean.PO;
 
 import java.util.Date;
 

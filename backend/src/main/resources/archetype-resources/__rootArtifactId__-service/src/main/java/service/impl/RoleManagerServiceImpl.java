@@ -42,10 +42,12 @@ import ${package}.core.exception.ServiceException;
 import ${package}.dao.CommonDAO;
 import ${package}.dao.RoleManagerDAO;
 import ${package}.model.TmFuncFrontPO;
+import ${package}.model.TmFunctionPO;
 import ${package}.model.TmRolePO;
+import ${package}.model.TrRoleFuncFrontPO;
 import ${package}.service.RoleManagerService;
 import ${package}.service.util.MenuNode;
-import com.sandrew.bury.bean.PageResult;
+import ${groupId}.bury.bean.PageResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -281,19 +283,77 @@ public class RoleManagerServiceImpl implements RoleManagerService
     }
 
     @Override
+    public JsonResult saveSelectedFunc(Integer roleId, List<Integer> functionIds, AclUserBean loginUser) throws ServiceException
+    {
+        JsonResult result = new JsonResult();
+        try
+        {
+            List<Integer> insertedIds = new ArrayList<>();
+            // 先清空该角色下全部功能
+            TrRoleFuncFrontPO cond = new TrRoleFuncFrontPO();
+            cond.setRoleId(roleId);
+            commonDAO.delete(cond);
+
+            // 重新生成角色功能关系
+            functionIds.stream().forEach(functionId -> {
+                createRoleFunction(roleId, functionId, insertedIds, loginUser);
+            });
+            return result.requestSuccess();
+        }
+        catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+            throw new ServiceException("添加功能失败", e);
+        }
+    }
+
+    private int createRoleFunction(Integer roleId, Integer functionId, List<Integer> createdFunction, AclUserBean loginUser)
+    {
+        try
+        {
+            // 插入角色下function id, 如果该function有父function,那么先插入父function，最后记录插入过的functionId
+
+            if (createdFunction.contains(functionId))
+            {
+                // 已经存在，不需要保存
+                return 0;
+            }
+            // 判断是否有父节点
+            TmFunctionPO function = commonDAO.selectById(new TmFunctionPO(functionId));
+            if (null != function.getFatherId())
+            {
+                createRoleFunction(roleId, function.getFatherId(), createdFunction, loginUser);
+            }
+            // 将该节点关联到该角色下
+            TrRoleFuncFrontPO roleFuncFront = new TrRoleFuncFrontPO();
+            roleFuncFront.setRoleId(roleId);
+            roleFuncFront.setFunctionId(functionId);
+            roleFuncFront.setCreateBy(loginUser.getUserId());
+            roleFuncFront.setCreateDate(new Date());
+            int count = commonDAO.insert(roleFuncFront);
+            createdFunction.add(functionId);
+            return count;
+        }
+        catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+            throw new RuntimeException("添加功能失败", e);
+        }
+    }
+
+    @Override
     public JsonResult getCheckPermission(Integer roleId) throws ServiceException
     {
         JsonResult result = new JsonResult();
         try
         {
-            TmFuncFrontPO cond = new TmFuncFrontPO();
+            TrRoleFuncFrontPO cond = new TrRoleFuncFrontPO();
             cond.setRoleId(roleId);
-            List<TmFuncFrontPO> functionList = commonDAO.select(cond);
-            List<String> checkedPermission = new ArrayList<>();
-            for (TmFuncFrontPO funcFront : functionList)
-            {
-                checkedPermission.add(funcFront.getPath());
-            }
+            List<TrRoleFuncFrontPO> roleFuncFrontList = commonDAO.select(cond);
+            List<Integer> checkedPermission = new ArrayList<>();
+            roleFuncFrontList.stream().forEach(el -> {
+                checkedPermission.add(el.getFunctionId());
+            });
             return result.requestSuccess(checkedPermission);
         }
         catch (Exception e)

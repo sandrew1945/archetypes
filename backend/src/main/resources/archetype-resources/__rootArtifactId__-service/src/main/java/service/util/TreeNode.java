@@ -37,40 +37,36 @@ import java.util.List;
  */
 public class TreeNode
 {
-	private String id;
+	private Integer functionId;
 
-	private String code;
+	private String path;
 
 	private String name;
 
-	private String imgUrl;
+	private String icon;
+
+	private Integer funcOrder;
 
 	private List<TreeNode> children;
 
-	private TreeNode fatherNode;
-
-	private String fatherId;
-
-	private String url;
-
-	public String getImgUrl()
+	public String getPath()
 	{
-		return imgUrl;
+		return path;
 	}
 
-	public void setImgUrl(String imgUrl)
+	public Integer getFunctionId()
 	{
-		this.imgUrl = imgUrl;
+		return functionId;
 	}
 
-	public String getId()
+	public void setFunctionId(Integer functionId)
 	{
-		return id;
+		this.functionId = functionId;
 	}
 
-	public void setId(String id)
+	public void setPath(String path)
 	{
-		this.id = id;
+		this.path = path;
 	}
 
 	public String getName()
@@ -78,54 +74,39 @@ public class TreeNode
 		return name;
 	}
 
-	public String getCode()
-	{
-		return code;
-	}
-
-	public void setCode(String code)
-	{
-		this.code = code;
-	}
-
 	public void setName(String name)
 	{
 		this.name = name;
 	}
 
-	public TreeNode getFatherNode()
+	public String getIcon()
 	{
-		return fatherNode;
+		return icon;
 	}
 
-	public void setFatherNode(TreeNode fatherNode)
+	public void setIcon(String icon)
 	{
-		this.fatherNode = fatherNode;
+		this.icon = icon;
 	}
 
-	public String getFatherId()
+	public Integer getFuncOrder()
 	{
-		return fatherId;
+		return funcOrder;
 	}
 
-	public void setFatherId(String fatherId)
+	public void setFuncOrder(Integer funcOrder)
 	{
-		this.fatherId = fatherId;
-	}
-
-	public String getUrl()
-	{
-		return url;
-	}
-
-	public void setUrl(String url)
-	{
-		this.url = url;
+		this.funcOrder = funcOrder;
 	}
 
 	public List<TreeNode> getChildren()
 	{
 		return children;
+	}
+
+	public void setChildren(List<TreeNode> children)
+	{
+		this.children = children;
 	}
 
 	/**
@@ -134,7 +115,7 @@ public class TreeNode
 	 * LastUpdate  : 2012-8-24
 	 * @param node
 	 */
-	public void addChild(TreeNode node)
+	public void addChildren(TreeNode node)
 	{
 		if (null == children)
 		{
@@ -154,39 +135,4 @@ public class TreeNode
 		return null == children ? false : true;
 	}
 
-	/**
-	 * 
-	 * Function    : 判断是否是叶子节点
-	 * LastUpdate  : 2012-10-30
-	 * @return
-	 */
-	public boolean isLeaf()
-	{
-		if (null == children || children.size() == 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	/**
-	 * 
-	 * Function    : 判断是否是根节点
-	 * LastUpdate  : 2016年10月25日
-	 * @return
-	 */
-	public boolean isRoot()
-	{
-		if (null == fatherNode)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
 }

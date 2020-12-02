@@ -9,7 +9,7 @@ import ${package}.core.common.JsonResult;
 import ${package}.core.exception.ServiceException;
 import ${package}.model.TmRolePO;
 import ${package}.model.TmUserPO;
-import com.sandrew.bury.bean.PageResult;
+import ${groupId}.bury.bean.PageResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

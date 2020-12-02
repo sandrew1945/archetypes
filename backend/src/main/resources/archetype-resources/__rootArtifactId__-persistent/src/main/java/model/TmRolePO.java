@@ -7,11 +7,11 @@
  */
 package ${package}.model;
 
-import com.sandrew.bury.annotations.TableName;
-import com.sandrew.bury.annotations.ColumnName;
-import com.sandrew.bury.bean.PO;
-import com.sandrew.bury.bean.Pack;
-import com.sandrew.bury.bean.EqualPack;
+import ${groupId}.bury.annotations.TableName;
+import ${groupId}.bury.annotations.ColumnName;
+import ${groupId}.bury.bean.PO;
+import ${groupId}.bury.bean.Pack;
+import ${groupId}.bury.bean.EqualPack;
 
 import java.util.Date;
 

@@ -11,7 +11,7 @@ import ${package}.core.exception.JsonException;
 import ${package}.core.exception.ServiceException;
 import ${package}.model.TmUserPO;
 import ${package}.service.UserManagerService;
-import com.sandrew.bury.bean.PageResult;
+import ${groupId}.bury.bean.PageResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

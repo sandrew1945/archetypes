@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.bean;
 
-import com.sandrew.bury.bean.PO;
+import ${groupId}.bury.bean.PO;
 import lombok.Data;
 
 @Data

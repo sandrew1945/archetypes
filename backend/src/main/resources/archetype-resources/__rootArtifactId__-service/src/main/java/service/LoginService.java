@@ -10,7 +10,6 @@ import ${package}.core.common.LoginResult;
 import ${package}.core.exception.ServiceException;
 import ${package}.model.TmUserPO;
 import ${package}.service.util.MenuNode;
-import ${package}.service.util.TreeNode;
 
 import java.util.List;
 
@@ -67,24 +66,6 @@ public interface LoginService
 	 */
 	List<RoleTreeNode> choiceRoleTree(Integer userId) throws ServiceException;
 
-	/**
-	 *
-	 * Function    :
-	 * LastUpdate  : 2016年4月16日
-	 * @param roleId
-	 * @return
-	 * @throws ServiceException
-	 */
-	String generateMenu(Integer roleId) throws ServiceException;
-
-
-	/**
-	 * 获取菜单树
-	 * @param roleId
-	 * @return
-	 * @throws ServiceException
-	 */
-	List<TreeNode> getMenuTreeNode(Integer roleId) throws ServiceException;
 	/**
 	 *
 	 * Function    : 用户选择完角色进入主界面

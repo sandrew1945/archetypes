@@ -41,8 +41,9 @@ import ${package}.model.TmRolePO;
 import ${package}.model.TmUserPO;
 import ${package}.model.TrUserRolePO;
 import ${package}.service.UserManagerService;
-import com.sandrew.bury.bean.EqualPack;
-import com.sandrew.bury.bean.PageResult;
+import ${groupId}.bury.bean.EqualPack;
+import ${groupId}.bury.bean.Pack;
+import ${groupId}.bury.bean.PageResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.CacheConfig;
@@ -224,6 +225,10 @@ public class UserManagerServiceImpl implements UserManagerService
             if (StringUtils.isNotEmpty(user.getPassword()))
             {
                 user.setPassword(MD5Encrypt.MD5Encode(user.getPassword()));
+            }
+            else
+            {
+                user.setPassword((Pack<String>) null);
             }
             return result.requestSuccess(commonDAO.update(cond, user));
         }

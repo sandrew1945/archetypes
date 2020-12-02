@@ -14,7 +14,6 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import javax.annotation.Resource;
@@ -46,11 +45,12 @@ public class GenerateImageController {
 	@RequestMapping("uploadImg")
 	public
 	@ResponseBody
-	JsonResult uploadImage(String filePath, MultipartFile file) throws JsonException
+	JsonResult uploadImage(String base64file, String filename) throws JsonException
 	{
 		try
 		{
-			return commonService.fileUploadLocal(AVATAR_PATH, file);
+
+			return commonService.fileUploadLocal(AVATAR_PATH, filename, base64file);
 		}
 		catch (Exception e)
 		{

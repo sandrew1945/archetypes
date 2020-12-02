@@ -4,17 +4,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PO_CONFIG>
 	<DB_CONNECTION TYPE="mysql" VALID="TRUE">
-		<PROPERTY NAME="DB_URL">jdbc:mysql://192.18.70.104:3306/${parentArtifactId}</PROPERTY>
+		<PROPERTY NAME="DB_URL">jdbc:mysql://192.18.70.104:3306/quasar</PROPERTY>
 		<PROPERTY NAME="DB_USER">root</PROPERTY>
 		<PROPERTY NAME="DB_PASSWORD">workout</PROPERTY>
 	</DB_CONNECTION>
 
-	<GEN_PO_PATH NAME="/Users/summer/Documents/Projects/work/MessageProj/${parentArtifactId}/${parentArtifactId}-persistent/src/main/java/${packageInPathFormat}/model" />
+	<GEN_PO_PATH NAME="/Users/summer/Documents/Projects/study/QuasarAdminProj/${parentArtifactId}/${parentArtifactId}-persistent/src/main/java/${packageInPathFormat}/model" />
 
 	<TABLES PACKAGE="${package}.model" IS_GENERATOR="TRUE">
 		<TABLE TAB_NAME="tm_func_front" PO_NAME="TmFuncFrontPO"></TABLE>
 		<TABLE TAB_NAME="tm_role" PO_NAME="TmRolePO"></TABLE>
 		<TABLE TAB_NAME="tm_user" PO_NAME="TmUserPO"></TABLE>
+		<TABLE TAB_NAME="tm_function" PO_NAME="TmFunctionPO"></TABLE>
 		<TABLE TAB_NAME="tr_user_role" PO_NAME="TrUserRolePO"></TABLE>
+		<TABLE TAB_NAME="tr_role_func_front" PO_NAME="TrRoleFuncFrontPO"></TABLE>
 	</TABLES>
 </PO_CONFIG>

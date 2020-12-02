@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.commmon;
 
-import com.sandrew.bury.util.POGenerator;
+import ${groupId}.bury.util.POGenerator;
 
 /**
  * Created by summer on 2019/7/26.

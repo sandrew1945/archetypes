@@ -15,48 +15,39 @@ import ${groupId}.bury.bean.EqualPack;
 
 import java.util.Date;
 
-@TableName("tm_func_front")
-public class TmFuncFrontPO extends PO
+@TableName("tm_function")
+public class TmFunctionPO extends PO
 {
 
-    public TmFuncFrontPO()
+    public TmFunctionPO()
     {
     }
 
 
-                                                            
-    public TmFuncFrontPO(Integer funcId)
+                                                
+    public TmFunctionPO(Integer functionId)
     {
-        if (null == this.funcId)
+        if (null == this.functionId)
         {
-            this.funcId = new EqualPack<Integer>();
+            this.functionId = new EqualPack<Integer>();
         }
-        this.funcId.setValue(funcId);
+        this.functionId.setValue(functionId);
     }
 
-    @ColumnName(value = "func_id", isPK = true, autoIncrement = true)
-    private Pack<Integer> funcId;
-
-    @ColumnName(value = "role_id", isPK = false, autoIncrement = false)
-    private Pack<Integer> roleId;
+    @ColumnName(value = "function_id", isPK = true, autoIncrement = true)
+    private Pack<Integer> functionId;
 
     @ColumnName(value = "path", isPK = false, autoIncrement = false)
     private Pack<String> path;
 
-    @ColumnName(value = "name", isPK = false, autoIncrement = false)
-    private Pack<String> name;
-
     @ColumnName(value = "title", isPK = false, autoIncrement = false)
     private Pack<String> title;
-
-    @ColumnName(value = "file", isPK = false, autoIncrement = false)
-    private Pack<String> file;
 
     @ColumnName(value = "icon", isPK = false, autoIncrement = false)
     private Pack<String> icon;
 
-    @ColumnName(value = "redirect", isPK = false, autoIncrement = false)
-    private Pack<String> redirect;
+    @ColumnName(value = "func_order", isPK = false, autoIncrement = false)
+    private Pack<Integer> funcOrder;
 
     @ColumnName(value = "father_id", isPK = false, autoIncrement = false)
     private Pack<Integer> fatherId;
@@ -77,42 +68,23 @@ public class TmFuncFrontPO extends PO
     private Pack<Date> updateDate;
 
 
-    public void setFuncId(Integer funcId)
+    public void setFunctionId(Integer functionId)
     {
-        if (null == this.funcId)
+        if (null == this.functionId)
         {
-            this.funcId = new EqualPack<Integer>();
+            this.functionId = new EqualPack<Integer>();
         }
-        this.funcId.setValue(funcId);
+        this.functionId.setValue(functionId);
     }
 
-    public void setFuncId(Pack<Integer> funcId)
+    public void setFunctionId(Pack<Integer> functionId)
     {
-        this.funcId = funcId;
+        this.functionId = functionId;
     }
         
-    public Integer getFuncId()
+    public Integer getFunctionId()
     {
-        return this.funcId == null ? null : this.funcId.getValue();
-    }
-
-    public void setRoleId(Integer roleId)
-    {
-        if (null == this.roleId)
-        {
-            this.roleId = new EqualPack<Integer>();
-        }
-        this.roleId.setValue(roleId);
-    }
-
-    public void setRoleId(Pack<Integer> roleId)
-    {
-        this.roleId = roleId;
-    }
-        
-    public Integer getRoleId()
-    {
-        return this.roleId == null ? null : this.roleId.getValue();
+        return this.functionId == null ? null : this.functionId.getValue();
     }
 
     public void setPath(String path)
@@ -134,25 +106,6 @@ public class TmFuncFrontPO extends PO
         return this.path == null ? null : this.path.getValue();
     }
 
-    public void setName(String name)
-    {
-        if (null == this.name)
-        {
-            this.name = new EqualPack<String>();
-        }
-        this.name.setValue(name);
-    }
-
-    public void setName(Pack<String> name)
-    {
-        this.name = name;
-    }
-        
-    public String getName()
-    {
-        return this.name == null ? null : this.name.getValue();
-    }
-
     public void setTitle(String title)
     {
         if (null == this.title)
@@ -170,25 +123,6 @@ public class TmFuncFrontPO extends PO
     public String getTitle()
     {
         return this.title == null ? null : this.title.getValue();
-    }
-
-    public void setFile(String file)
-    {
-        if (null == this.file)
-        {
-            this.file = new EqualPack<String>();
-        }
-        this.file.setValue(file);
-    }
-
-    public void setFile(Pack<String> file)
-    {
-        this.file = file;
-    }
-        
-    public String getFile()
-    {
-        return this.file == null ? null : this.file.getValue();
     }
 
     public void setIcon(String icon)
@@ -210,23 +144,23 @@ public class TmFuncFrontPO extends PO
         return this.icon == null ? null : this.icon.getValue();
     }
 
-    public void setRedirect(String redirect)
+    public void setFuncOrder(Integer funcOrder)
     {
-        if (null == this.redirect)
+        if (null == this.funcOrder)
         {
-            this.redirect = new EqualPack<String>();
+            this.funcOrder = new EqualPack<Integer>();
         }
-        this.redirect.setValue(redirect);
+        this.funcOrder.setValue(funcOrder);
     }
 
-    public void setRedirect(Pack<String> redirect)
+    public void setFuncOrder(Pack<Integer> funcOrder)
     {
-        this.redirect = redirect;
+        this.funcOrder = funcOrder;
     }
         
-    public String getRedirect()
+    public Integer getFuncOrder()
     {
-        return this.redirect == null ? null : this.redirect.getValue();
+        return this.funcOrder == null ? null : this.funcOrder.getValue();
     }
 
     public void setFatherId(Integer fatherId)

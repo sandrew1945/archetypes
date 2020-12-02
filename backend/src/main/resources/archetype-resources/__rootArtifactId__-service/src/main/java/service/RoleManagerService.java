@@ -10,7 +10,7 @@ import ${package}.core.common.JsonResult;
 import ${package}.core.exception.ServiceException;
 import ${package}.model.TmRolePO;
 import ${package}.service.util.MenuNode;
-import com.sandrew.bury.bean.PageResult;
+import ${groupId}.bury.bean.PageResult;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public interface RoleManagerService
 	 * LastUpdate  : 2016年5月27日
 	 * @return
 	 */
-	public List<TmRolePO> getRoleList() throws ServiceException;
+	List<TmRolePO> getRoleList() throws ServiceException;
 	
 	/**
 	 * Function    : 分页查询角色列表
@@ -38,7 +38,7 @@ public interface RoleManagerService
 	 * @param condition 查询条件
 	 * @param curPage 分页信息
 	 */
-	public PageResult<RoleBean> roleManagerPageQuery(TmRolePO condition, int limit, int curPage) throws ServiceException;
+	PageResult<RoleBean> roleManagerPageQuery(TmRolePO condition, int limit, int curPage) throws ServiceException;
 	
 
 	/**
@@ -48,7 +48,7 @@ public interface RoleManagerService
 	 * @param role 角色
 	 * @param aclUser 登录用户
 	 */
-	public JsonResult createRole(TmRolePO role, AclUserBean aclUser) throws ServiceException;
+	JsonResult createRole(TmRolePO role, AclUserBean aclUser) throws ServiceException;
 	
 	/**
 	 * Function    :根据角色id查询角色信息
@@ -58,7 +58,7 @@ public interface RoleManagerService
 	 * @return
 	 * @throws ServiceException
 	 */
-	public TmRolePO findByroleId(Integer roleId) throws ServiceException;
+	TmRolePO findByroleId(Integer roleId) throws ServiceException;
 	
 	/**
 	 * Function    :修改编辑角色信息
@@ -69,7 +69,7 @@ public interface RoleManagerService
 	 * @return
 	 * @throws ServiceException
 	 */
-	public JsonResult updateRole(TmRolePO role, AclUserBean aclUser) throws ServiceException;
+	JsonResult updateRole(TmRolePO role, AclUserBean aclUser) throws ServiceException;
 	
 
 	/**
@@ -80,7 +80,7 @@ public interface RoleManagerService
 	 * @return
 	 * @throws ServiceException
 	 */
-	public JsonResult deleteRole(Integer roleId, AclUserBean aclUser) throws ServiceException;
+	JsonResult deleteRole(Integer roleId, AclUserBean aclUser) throws ServiceException;
 
 
 	/**
@@ -92,6 +92,16 @@ public interface RoleManagerService
 	 * @throws ServiceException
      */
 	JsonResult savePermission(Integer roleId, List<MenuNode> nodes, AclUserBean loginUser) throws ServiceException;
+
+	/**
+	 *  保存角色下的菜单(quasar)
+	 * @param roleId
+	 * @param functionIds
+	 * @param loginUser
+	 * @return
+	 * @throws ServiceException
+	 */
+	JsonResult saveSelectedFunc(Integer roleId, List<Integer> functionIds, AclUserBean loginUser) throws ServiceException;
 
 	/**
 	 * 	获取已选择菜单
